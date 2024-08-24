@@ -1,3 +1,5 @@
+package com.example;
+
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,30 +23,19 @@ public class FlipkartLoginTest {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/HTC/Downloads/chromedriver-win64/chromedriver-win64/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:/Users/sande/Downloads/chromedriver-win64 (1)/chromedriver-win64/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("https://www.flipkart.com");
+        driver.get("https://www.facebook.com");
 
-        // Close the initial login popup if it appears
-        try {
-            WebElement closeButton = driver.findElement(By.cssSelector("button._2KpZ6l._2doB4z"));
-            closeButton.click();
-        } catch (Exception e) {
-            System.out.println("Login popup did not appear or was not found.");
-        }
+
     }
 
     @Test(dataProvider = "loginData")
     public void testLogin(String username, String password) {
-        // Navigate to the login page or click on the login button
-        WebElement loginLink = driver.findElement(By.cssSelector("a._1_3w1N"));
-        loginLink.click();
-
-        // Wait for login modal to appear (you might need to wait explicitly)
-        WebElement userField = driver.findElement(By.cssSelector("input._2IX_2-._2LYh3d.VJZDxU"));
-        WebElement passField = driver.findElement(By.cssSelector("input._2IX_2-._3mctLh.VJZDxU"));
-        WebElement loginButton = driver.findElement(By.cssSelector("button._2KpZ6l._2HKlqd._3AWRsL"));
+        WebElement userField = driver.findElement(By.cssSelector("input[data-testid$='email']"));
+        WebElement passField = driver.findElement(By.cssSelector("input[data-testid$='pass']"));
+        WebElement loginButton = driver.findElement(By.cssSelector("button[data-testid='royal_login_button']"));
 
         userField.clear();
         userField.sendKeys(username);
